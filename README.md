@@ -12,4 +12,4 @@ bower install purescript-assert
 
 ## Module documentation
 
-[`Test.Assert.md`](docs/Test.Assert.md)
+[`Test.Assert`](docs/Test.Assert.md)
