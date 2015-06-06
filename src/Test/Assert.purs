@@ -1,6 +1,7 @@
 module Test.Assert where
 
 import Control.Monad.Eff (Eff())
+import Prelude
 
 -- | Assertion effect type.
 foreign import data ASSERT :: !
