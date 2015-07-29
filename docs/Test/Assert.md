@@ -26,4 +26,16 @@ assert' :: forall e. String -> Boolean -> Eff (assert :: ASSERT | e) Unit
 Throws a runtime exception with the specified message when the boolean
 value is false.
 
+#### `assertThrows`
+
+``` purescript
+assertThrows :: forall e a. (Unit -> a) -> Eff (assert :: ASSERT | e) Unit
+```
+
+#### `assertThrows'`
+
+``` purescript
+assertThrows' :: forall e a. String -> (Unit -> a) -> Eff (assert :: ASSERT | e) Unit
+```
+
 
