@@ -2,10 +2,6 @@
   "name": "purescript-assert",
   "homepage": "https://github.com/purescript/purescript-assert",
   "description": "Basic assertions library for low level testing",
-  "keywords": [
-    "purescript",
-    "assert"
-  ],
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -21,6 +17,6 @@
     "package.json"
   ],
   "dependencies": {
-    "purescript-eff": "^0.1.0"
+    "purescript-eff": "^1.0.0-rc.1"
   }
 }
