@@ -12,6 +12,6 @@ Basic assertions library for low level testing. This is primarily for testing th
 bower install purescript-assert
 ```
 
-## Module documentation
+## Documentation
 
-[`Test.Assert`](docs/Test/Assert.md)
+Module documentation is [published on Pursuit](http://pursuit.purescript.org/packages/purescript-assert).
