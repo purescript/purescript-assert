@@ -6,12 +6,12 @@ module Test.Assert
   , assertThrows'
   ) where
 
-import Control.Monad.Eff (Eff)
+import Control.Monad.Eff (Eff, kind Effect)
 import Control.Monad ((=<<))
 import Data.Unit (Unit)
 
 -- | Assertion effect type.
-foreign import data ASSERT :: !
+foreign import data ASSERT :: Effect
 
 -- | Throws a runtime exception with message "Assertion failed" when the boolean
 -- | value is false.
