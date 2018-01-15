@@ -6,9 +6,10 @@ module Test.Assert
   , assertThrows'
   ) where
 
+import Prelude
+
 import Control.Monad.Eff (Eff, kind Effect)
-import Control.Monad ((=<<))
-import Data.Unit (Unit)
+import Control.Monad.Eff.Console (CONSOLE, error)
 
 -- | Assertion effect type.
 foreign import data ASSERT :: Effect
@@ -55,3 +56,40 @@ foreign import checkThrows
   :: forall e a
    . (Unit -> a)
   -> Eff (assert :: ASSERT | e) Boolean
+
+-- | Compares the `expected` and `actual` values for equality and
+-- | throws a runtime exception when the values are not equal.
+-- |
+-- | The message indicates the expected value and the actual value.
+assertEqual
+  :: forall a e
+   . Eq a
+  => Show a
+  => { actual :: a, expected :: a }
+  -> Eff (assert :: ASSERT, console :: CONSOLE | e) Unit
+assertEqual {actual, expected} = do
+  unless result $ error message
+  assert' message result
+  where
+  message = "Expected: " <> show expected <> "\nActual:   " <> show actual
+  result = actual == expected
+
+-- | Throws a runtime exception when the value is `false`.
+-- |
+-- | The message indicates the expected value (`true`)
+-- | and the actual value (`false`).
+assertTrue
+  :: forall e
+   . Boolean
+  -> Eff (assert :: ASSERT, console :: CONSOLE | e) Unit
+assertTrue actual = assertEqual { actual, expected: true }
+
+-- | Throws a runtime exception when the value is `true`.
+-- |
+-- | The message indicates the expected value (`false`)
+-- | and the actual value (`true`).
+assertFalse
+  :: forall e
+   . Boolean
+  -> Eff (assert :: ASSERT, console :: CONSOLE | e) Unit
+assertFalse actual = assertEqual { actual, expected: false }
