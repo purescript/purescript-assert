@@ -2,8 +2,11 @@ module Test.Assert
   ( ASSERT
   , assert
   , assert'
+  , assertEqual
+  , assertFalse
   , assertThrows
   , assertThrows'
+  , assertTrue
   ) where
 
 import Prelude
