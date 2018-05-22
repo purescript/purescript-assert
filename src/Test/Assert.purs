@@ -1,6 +1,5 @@
 module Test.Assert
-  ( ASSERT
-  , assert
+  ( assert
   , assert'
   , assertEqual
   , assertFalse
@@ -11,33 +10,29 @@ module Test.Assert
 
 import Prelude
 
-import Control.Monad.Eff (Eff, kind Effect)
-import Control.Monad.Eff.Console (CONSOLE, error)
-
--- | Assertion effect type.
-foreign import data ASSERT :: Effect
+import Effect (Effect)
+import Effect.Console (error)
 
 -- | Throws a runtime exception with message "Assertion failed" when the boolean
 -- | value is false.
-assert :: forall e. Boolean -> Eff (assert :: ASSERT | e) Unit
+assert :: Boolean -> Effect Unit
 assert = assert' "Assertion failed"
 
 -- | Throws a runtime exception with the specified message when the boolean
 -- | value is false.
 foreign import assert'
-  :: forall e
-   . String
+  :: String
   -> Boolean
-  -> Eff (assert :: ASSERT | e) Unit
+  -> Effect Unit
 
 -- | Throws a runtime exception with message "Assertion failed: An error should
 -- | have been thrown", unless the argument throws an exception when evaluated.
 -- |
 -- | This function is specifically for testing unsafe pure code; for example,
 -- | to make sure that an exception is thrown if a precondition is not
--- | satisfied. Functions which use `Eff (err :: EXCEPTION | eff) a` can be
+-- | satisfied. Functions which use `Effect a` can be
 -- | tested with `catchException` instead.
-assertThrows :: forall e a. (Unit -> a) -> Eff (assert :: ASSERT | e) Unit
+assertThrows :: forall a. (Unit -> a) -> Effect Unit
 assertThrows =
   assertThrows' "Assertion failed: An error should have been thrown"
 
@@ -46,30 +41,30 @@ assertThrows =
 -- |
 -- | This function is specifically for testing unsafe pure code; for example,
 -- | to make sure that an exception is thrown if a precondition is not
--- | satisfied. Functions which use `Eff (err :: EXCEPTION | eff) a` can be
+-- | satisfied. Functions which use `Effect a` can be
 -- | tested with `catchException` instead.
 assertThrows'
-  :: forall e a
+  :: forall a
    . String
   -> (Unit -> a)
-  -> Eff (assert :: ASSERT | e) Unit
+  -> Effect Unit
 assertThrows' msg fn = assert' msg =<< checkThrows fn
 
 foreign import checkThrows
-  :: forall e a
+  :: forall a
    . (Unit -> a)
-  -> Eff (assert :: ASSERT | e) Boolean
+  -> Effect Boolean
 
 -- | Compares the `expected` and `actual` values for equality and
 -- | throws a runtime exception when the values are not equal.
 -- |
 -- | The message indicates the expected value and the actual value.
 assertEqual
-  :: forall a e
+  :: forall a
    . Eq a
   => Show a
   => { actual :: a, expected :: a }
-  -> Eff (assert :: ASSERT, console :: CONSOLE | e) Unit
+  -> Effect Unit
 assertEqual {actual, expected} = do
   unless result $ error message
   assert' message result
@@ -82,9 +77,8 @@ assertEqual {actual, expected} = do
 -- | The message indicates the expected value (`true`)
 -- | and the actual value (`false`).
 assertTrue
-  :: forall e
-   . Boolean
-  -> Eff (assert :: ASSERT, console :: CONSOLE | e) Unit
+  :: Boolean
+  -> Effect Unit
 assertTrue actual = assertEqual { actual, expected: true }
 
 -- | Throws a runtime exception when the value is `true`.
@@ -92,7 +86,6 @@ assertTrue actual = assertEqual { actual, expected: true }
 -- | The message indicates the expected value (`false`)
 -- | and the actual value (`true`).
 assertFalse
-  :: forall e
-   . Boolean
-  -> Eff (assert :: ASSERT, console :: CONSOLE | e) Unit
+  :: Boolean
+  -> Effect Unit
 assertFalse actual = assertEqual { actual, expected: false }
