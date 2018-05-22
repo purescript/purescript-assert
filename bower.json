@@ -1,8 +1,7 @@
 {
   "name": "purescript-assert",
   "homepage": "https://github.com/purescript/purescript-assert",
-  "description": "Basic assertions library for low level testing",
-  "license": "MIT",
+  "license": "BSD-3-Clause",
   "repository": {
     "type": "git",
     "url": "git://github.com/purescript/purescript-assert.git"
@@ -17,7 +16,8 @@
     "package.json"
   ],
   "dependencies": {
-    "purescript-effect": "purescript/purescript-effect#compiler/0.12",
-    "purescript-console": "purescript/purescript-console#compiler/0.12"
+    "purescript-effect": "^2.0.0",
+    "purescript-console": "^4.0.0",
+    "purescript-prelude": "^4.0.0"
   }
 }
