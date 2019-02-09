@@ -2,10 +2,13 @@ module Test.Assert
   ( assert
   , assert'
   , assertEqual
+  , assertEqual'
   , assertFalse
+  , assertFalse'
   , assertThrows
   , assertThrows'
   , assertTrue
+  , assertTrue'
   ) where
 
 import Prelude
@@ -65,11 +68,26 @@ assertEqual
   => Show a
   => { actual :: a, expected :: a }
   -> Effect Unit
-assertEqual {actual, expected} = do
+assertEqual = assertEqual' ""
+
+-- | Compares the `expected` and `actual` values for equality and throws a
+-- | runtime exception with the specified message when the values are not equal.
+-- |
+-- | The message also indicates the expected value and the actual value.
+assertEqual'
+  :: forall a
+   . Eq a
+  => Show a
+  => String
+  -> { actual :: a, expected :: a }
+  -> Effect Unit
+assertEqual' userMessage {actual, expected} = do
   unless result $ error message
   assert' message result
   where
-  message = "Expected: " <> show expected <> "\nActual:   " <> show actual
+  message = (if userMessage == "" then "" else userMessage <> "\n")
+             <> "Expected: " <> show expected
+             <> "\nActual:   " <> show actual
   result = actual == expected
 
 -- | Throws a runtime exception when the value is `false`.
@@ -81,6 +99,17 @@ assertTrue
   -> Effect Unit
 assertTrue actual = assertEqual { actual, expected: true }
 
+-- | Throws a runtime exception with the specified message when the value is
+-- | `false`.
+-- |
+-- | The message also indicates the expected value (`true`)
+-- | and the actual value (`false`).
+assertTrue'
+  :: String
+  -> Boolean
+  -> Effect Unit
+assertTrue' message actual = assertEqual' message { actual, expected: true }
+
 -- | Throws a runtime exception when the value is `true`.
 -- |
 -- | The message indicates the expected value (`false`)
@@ -89,3 +118,14 @@ assertFalse
   :: Boolean
   -> Effect Unit
 assertFalse actual = assertEqual { actual, expected: false }
+
+-- | Throws a runtime exception with the specified message when the value is
+-- | `true`.
+-- |
+-- | The message also indicates the expected value (`false`)
+-- | and the actual value (`true`).
+assertFalse'
+  :: String
+  -> Boolean
+  -> Effect Unit
+assertFalse' message actual = assertEqual' message { actual, expected: false }
