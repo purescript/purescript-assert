@@ -23,7 +23,10 @@ assert = assert' "Assertion failed"
 
 -- | Throws a runtime exception with the specified message when the boolean
 -- | value is false.
-foreign import assert'
+assert' :: String -> Boolean -> Effect Unit
+assert' = assertImpl
+
+foreign import assertImpl
   :: String
   -> Boolean
   -> Effect Unit
