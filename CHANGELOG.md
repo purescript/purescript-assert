@@ -5,6 +5,7 @@ Notable changes to this project are documented in this file. The format is based
 ## [Unreleased]
 
 Breaking changes:
+- Updated dependencies for PureScript 0.14 (#16)
 
 New features:
 
