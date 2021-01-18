@@ -11,6 +11,14 @@ New features:
 Bugfixes:
 
 Other improvements:
+- Generate changelog and add PR template (#18)
+- Migrated to GitHub Actions and updated installation instructions (#17)
+- Updated psa to v0.8.0
+- Removed primes from foreign modules exports
+- Remove `return {}` from FFI functions
+- Bumped pulp version (#14)
+- Updated CI (#13)
+
 
 ## [v4.1.0](https://github.com/purescript/purescript-assert/releases/tag/v4.1.0) - 2019-02-09
 
