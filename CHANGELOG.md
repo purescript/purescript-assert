@@ -5,14 +5,14 @@ Notable changes to this project are documented in this file. The format is based
 ## [Unreleased]
 
 Breaking changes:
-- Updated dependencies for PureScript 0.14 (#16)
+- Added support for PureScript 0.14 and dropped support for all previous versions (#16)
 
 New features:
 
 Bugfixes:
 
 Other improvements:
-- Generated changelog and added PR template (#18 #19)
+- Generated changelog and added PR template (#18, #19)
 - Migrated to GitHub Actions and updated installation instructions (#17)
 - Updated psa to v0.8.0
 - Removed primes from foreign modules exports
