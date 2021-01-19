@@ -5,12 +5,20 @@ Notable changes to this project are documented in this file. The format is based
 ## [Unreleased]
 
 Breaking changes:
+- Added support for PureScript 0.14 and dropped support for all previous versions (#16)
 
 New features:
 
 Bugfixes:
 
 Other improvements:
+- Generated changelog and added PR template (#18, #19)
+- Migrated to GitHub Actions and updated installation instructions (#17)
+- Updated psa to v0.8.0
+- Removed primes from foreign modules exports
+- Removed `return {}` from FFI functions
+- Bumped pulp version (#14)
+- Updated CI (#13)
 
 ## [v4.1.0](https://github.com/purescript/purescript-assert/releases/tag/v4.1.0) - 2019-02-09
 
