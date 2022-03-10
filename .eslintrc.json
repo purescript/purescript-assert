@@ -1,10 +1,11 @@
 {
-  "parserOptions": {
-    "ecmaVersion": 5
-  },
   "extends": "eslint:recommended",
+  "parserOptions": {
+    "ecmaVersion": "latest",
+    "sourceType": "module"
+  },
   "env": {
-    "commonjs": true
+    "es6": true
   },
   "rules": {
     "strict": [2, "global"],

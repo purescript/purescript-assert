@@ -1,23 +1,19 @@
-"use strict";
-
-exports.assertImpl = function (message) {
-  return function (success) {
-    return function () {
-      if (!success) throw new Error(message);
-    };
+export function assertImpl(message) {
+  return (success) => () => {
+    if (!success) throw new Error(message);
   };
-};
+}
 
-exports.checkThrows = function (fn) {
-  return function () {
+export function checkThrows(fn) {
+  return () => {
     try {
       fn();
       return false;
     } catch (e) {
       if (e instanceof Error) return true;
-      var err = new Error("Threw something other than an Error");
+      const err = new Error("Threw something other than an Error");
       err.something = e;
       throw err;
     }
   };
-};
+}

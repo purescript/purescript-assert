@@ -1,13 +1,13 @@
 {
   "private": true,
   "scripts": {
-    "clean": "rimraf output && rimraf .pulp-cache",
-    "build": "eslint src && pulp build -- --censor-lib --strict"
+    "clean": "rimraf output && rimraf .spago",
+    "build": "eslint src && spago build -- --censor-lib --strict"
   },
   "devDependencies": {
-    "eslint": "^7.15.0",
-    "pulp": "^15.0.0",
+    "eslint": "^8.10.0",
     "purescript-psa": "^0.8.0",
-    "rimraf": "^3.0.2"
+    "rimraf": "^3.0.2",
+    "spago": "^0.20.7"
   }
 }
