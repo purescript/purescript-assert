@@ -16,8 +16,8 @@
     "package.json"
   ],
   "dependencies": {
-    "purescript-console": "https://github.com/working-group-purescript-es/purescript-console.git#es-modules",
-    "purescript-effect": "https://github.com/working-group-purescript-es/purescript-effect.git#es-modules",
-    "purescript-prelude": "https://github.com/working-group-purescript-es/purescript-prelude.git#es-modules"
+    "purescript-console": "master",
+    "purescript-effect": "master",
+    "purescript-prelude": "master"
   }
 }
