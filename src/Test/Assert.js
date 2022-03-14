@@ -1,14 +1,12 @@
-"use strict";
-
-exports.assertImpl = function (message) {
+export function assertImpl(message) {
   return function (success) {
     return function () {
       if (!success) throw new Error(message);
     };
   };
-};
+}
 
-exports.checkThrows = function (fn) {
+export function checkThrows(fn) {
   return function () {
     try {
       fn();
@@ -20,4 +18,4 @@ exports.checkThrows = function (fn) {
       throw err;
     }
   };
-};
+}
