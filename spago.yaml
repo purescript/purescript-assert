@@ -1,5 +1,6 @@
 package:
   name: assert
+  description: Basic assertions for low-level testing of core libraries
   build:
     strict: true
     pedanticPackages: true
