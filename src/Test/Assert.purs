@@ -84,13 +84,15 @@ assertEqual'
   => String
   -> { actual :: a, expected :: a }
   -> Effect Unit
-assertEqual' userMessage {actual, expected} = do
+assertEqual' userMessage { actual, expected } = do
   unless result $ error message
   assert' message result
   where
   message = (if userMessage == "" then "" else userMessage <> "\n")
-             <> "Expected: " <> show expected
-             <> "\nActual:   " <> show actual
+    <> "Expected: "
+    <> show expected
+    <> "\nActual:   "
+    <> show actual
   result = actual == expected
 
 -- | Throws a runtime exception when the value is `false`.
